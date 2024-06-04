@@ -1,0 +1,94 @@
+openapi: 3.0.0
+info:
+  title: Article API
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/v1
+paths:
+  /articles:
+    get:
+      summary: Get a list of articles
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                articles:
+                  - id: 1
+                    title: "Introduction to Swagger"
+                    content: "Swagger is a powerful tool for API documentation."
+                  - id: 2
+                    title: "RESTful API Best Practices"
+                    content: "Learn about best practices for designing RESTful APIs."
+    post:
+      summary: Create a new article
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              title: "Getting Started with OpenAPI"
+              content: "OpenAPI is a specification for building APIs."
+      responses:
+        '201':
+          description: Article created successfully
+          content:
+            application/json:
+              example:
+                id: 3
+                title: "Getting Started with OpenAPI"
+                content: "OpenAPI is a specification for building APIs."
+  /articles/{articleId}:
+    get:
+      summary: Get details of a specific article
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                id: 1
+                title: "Introduction to Swagger"
+                content: "Swagger is a powerful tool for API documentation."
+    put:
+      summary: Update details of a specific article
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            example:
+              title: "Updated Introduction to Swagger"
+              content: "Swagger is a powerful tool for API documentation with updates."
+      responses:
+        '200':
+          description: Article updated successfully
+          content:
+            application/json:
+              example:
+                id: 1
+                title: "Updated Introduction to Swagger"
+                content: "Swagger is a powerful tool for API documentation with updates."
+    delete:
+      summary: Delete a specific article
+      parameters:
+        - name: articleId
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Article deleted successfully

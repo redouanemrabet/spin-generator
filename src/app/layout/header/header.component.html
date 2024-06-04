@@ -1,0 +1,38 @@
+<!-- src/app/navigation/navigation.component.html -->
+<nav class="sticky top-0 z-40 bg-white py-2 pl-1 pr-4 shadow-md">
+  <div class="container-fluid grid grid-cols-10">
+    <div class="col-span-3 flex">
+      <button
+        (click)="collapse.emit()"
+        [ngClass]="{ 'border-2 border-sky-700': !isCollapsed }"
+        class="border-2 hover:border-sky-700 px-4 py-2 rounded"
+      >
+        <i *ngIf="isCollapsed" matTooltip="Ouvrir" class="text-xl text-sky-700 fas fa-bars"></i>
+        <i *ngIf="!isCollapsed" matTooltip="Fermer" class="text-xl text-sky-700 fas fa-times"></i>
+      </button>
+      <div class="flex items-center w-[100%] mx-auto">
+        <img class="ml-2 w-12 cursor-pointer" src="../../../assets/sopra.png" alt="company logo" />
+        <p class="py-4 text-gray-600 text-xl mt-2 font-bold ml-2">SPIN GENERATOR</p>
+      </div>
+    </div>
+
+    <div class="hidden col-span-6 lg:flex md:flex justify-start space-x-4">
+      <a
+        *ngFor="let menu of allMenus"
+        routerLinkActive="active"
+        [routerLink]="menu.path"
+        [ngClass]="{ 'text-primary': activeTab === menu.menu }"
+        class="p-4 inline-flex items-center rounded hover:text-primary"
+      >
+        {{ menu.label }}
+      </a>
+    </div>
+
+    <div class="lg:hidden md:hidden col-span-7">
+      <app-dropdown-mobile-menu></app-dropdown-mobile-menu>
+    </div>
+    <div class="hidden lg:flex md:flex justify-end col-span-1">
+      <app-dropdown-user></app-dropdown-user>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,23 @@
+.ng-select.custom-ng-select ::ng-deep {
+
+  &.ng-select-container {
+         border: none;
+
+         box-shadow: none;
+         background-color: #F8F8F8;
+         align-items:center;
+         justify-content:center ;
+        min-height: 50px;
+          }
+  }
+
+::ng-deep.ng-select-container {
+
+   border-radius: 2rem;
+}
+
+
+
+.custom{
+    border: 2px solid rgb(210, 25, 83);
+  }

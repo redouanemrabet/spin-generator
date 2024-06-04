@@ -1,0 +1,51 @@
+
+<div *ngIf="afterSearch"   class="flex w-full bg-white mt-8">
+  <div class="container">
+    <div class="w-full p-8 rounded-2xl shadow-2xl">
+      <div class="flex">
+        <h2 class="text-bold uppercase">liste des clients</h2>
+      </div>
+      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mt-8">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" class="px-6 upercase py-3">Numéro</th>
+            <th scope="col" class="px-6 upercase py-3">Nom & Prénom</th>
+            <th scope="col" class="px-6 uppercase py-3">N° Mobile</th>
+            <th scope="col" class="px-6 uppercase py-3">date naissance</th>
+            <th scope="col" class="uppercase px-6 py-3">type de PI</th>
+            <th scope="col" class="uppercase px-6 py-3">N ° de:</th>
+            <th scope="col" class="uppercase px-6 py-3">Selectionner</th>
+          </tr>
+        </thead>
+        <tbody  *ngIf="clients">
+          <tr *ngFor="let item of clients" class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+               {{ (item.id) }}
+            </th>
+            <td class="px-6 py-4">{{(item.prenom)}}</td>
+            <td class="px-6 py-4">{{item.adresseClient}}</td>
+            <td class="px-6 py-4">{{item.nomRaisonSocial}}</td>
+            <td class="px-6 py-4">{{item.prenom}}</td>
+            <td class="px-6 py-4">{{item.prenom}}</td>
+            <td class="px-6 py-4">
+              <input
+                id="default-radio-1"
+                type="radio"
+                value="item"
+                (change)="onSelect(item)"
+                name="default-radio"
+                class="w-4 h-4 text-primary bg-gray-100"
+              />
+            </td>
+          </tr>
+
+        </tbody>
+        <div  *ngIf="!clients" class="my-2 mt-6 flex justify-center">
+
+                <h1>Aucun Client  Trouvé!</h1>
+
+        </div>
+      </table>
+    </div>
+  </div>
+</div>

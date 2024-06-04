@@ -1,0 +1,1850 @@
+swagger: '2.0'
+info:
+  description: >-
+    Description de l'API Réferentiel ABB (Compte, Client, Produits, Adresses....).
+  version: 0.0.1
+  title: Swagger Referentiel ABB
+  contact:
+    email: r.zerhouni@albaridbank.ma
+host: abb.front
+basePath: /abb-api-referentiel
+tags:
+  - name: compte
+    description: API Comptes ABB
+
+schemes:
+  - http
+paths:
+  '/compte/bdc/{idCompte}':
+    get:
+      tags:
+        - compte
+      summary: Récupération des contrats et produits du compte
+      description: ''
+      operationId: getBDC
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: idCompte
+          in: path
+          description: l'identifiant du compte
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/BDCResponse'
+        '400':
+          description: Identifiant du compte invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/compte/bdcEtCat/{idCompte}':
+    get:
+      tags:
+        - compte
+      summary: Récupération des contrats BDC et CAT du compte
+      description: ''
+      operationId: getCompteBDCETCAT
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: idCompte
+          in: path
+          description: l'identifiant du compte
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/BDCetCATResponse'
+        '400':
+          description: Identifiant du compte invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  /compte/search:
+    post:
+      tags:
+        - compte
+      summary: Recherche multi critère des comptes client
+      description: ''
+      operationId: searchCompte
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: body
+          in: body
+          description: Critères de recherche
+          required: true
+          schema:
+            $ref: '#/definitions/SearchCompteClientRequest'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/SearchCompteResponse'
+        '400':
+          description: Critères de recherche invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/compte/moyenpaiement/{idCompte}':
+    get:
+      tags:
+        - compte
+      summary: Récupération des moyens de paiement
+      description: ''
+      operationId: getMoyenPaiement
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: idCompte
+          in: path
+          description: l'identifiant du compte
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/MoyenPaiementResponse'
+        '400':
+          description: Identifiant du compte invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/comptes/moyenpaiement/{lstCompte}':
+    get:
+      tags:
+        - compte
+      summary: Récupération des moyens de paiement par liste compte
+      description: ''
+      operationId: getMoyenPaiementParComptes
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: lstCompte
+          in: path
+          description: les identifiants compte
+          required: true
+          type: array
+          items:
+            type: integer
+            format: int64
+          minItems: 1
+          collectionFormat: csv
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/MoyenPaiementResponse'
+        '400':
+          description: Identifiant du compte invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/compte/{idCompte}':
+    get:
+      tags:
+        - compte
+      summary: Récupération des informations compte par idCompte
+      description: ''
+      operationId: getCompte
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: idCompte
+          in: path
+          description: l'identifiant du compte
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/CompteDto'
+        '400':
+          description: Identifiant du compte invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/compte/signatures/{idCompte}':
+    get:
+      tags:
+        - compte
+      summary: Récupération de la signature attachée à un compte
+      description: ''
+      operationId: getSignatures
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: idCompte
+          in: path
+          description: l'identifiant du compte
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/SignaturesResponse'
+        '400':
+          description: Identifiant du compte invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/client/search':
+    post:
+      tags:
+        - client
+      summary: Recherche multi critère des clients & comptes
+      description: ''
+      operationId: searchClient
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: body
+          in: body
+          description: Critères de recherche
+          required: true
+          schema:
+            $ref: '#/definitions/SearchCompteClientRequest'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/SearchClientResponse'
+        '400':
+          description: Critères de recherche invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/sgfa/client/search':
+    post:
+      tags:
+        - sgfa
+      summary: Recherche multi critère des clients & comptes
+      description: ''
+      operationId: searchClientSGFA
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: body
+          in: body
+          description: Critères de recherche
+          required: true
+          schema:
+            $ref: '#/definitions/SGFASearchCompteClientRequest'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/SGFASearchClientResponse'
+        '400':
+          description: Critères de recherche invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/client/bdcEtCat/{idClient}':
+    get:
+      tags:
+        - client
+      summary: Récupération des contrats BDC et CAT du client
+      description: ''
+      operationId: getClientBDCETCAT
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: idClient
+          in: path
+          description: l'identifiant du client
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/BDCetCATResponse'
+        '400':
+          description: Identifiant du compte invalide
+        '404':
+          description: Client introuvable
+        '405':
+          description: Validation exception
+  '/contrats/{idCompte}':
+    get:
+      tags:
+        - compte
+      summary: Récupération des contrats et produits d'un compte
+      description: ''
+      operationId: findContratsEtProduitsByCompte
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: idCompte
+          in: path
+          description: l'identifiant du compte
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/ContratsResponse'
+        '400':
+          description: Identifiant du compte invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/avoirs/{idCompte}/count':
+    get:
+      tags:
+        - compte
+      summary: Récupération le nombre de contrats et produits d'un compte
+      description: ''
+      operationId: countAvoirsEtProduitsByCompte
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: idCompte
+          in: path
+          description: l'identifiant du compte
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/CountAvoirResponse'
+        '400':
+          description: Identifiant du compte invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/client/contrats/{idClient}':
+    get:
+      tags:
+        - client
+      summary: Récupération des contrats et produits d'un client
+      description: ''
+      operationId: findContratsEtProduits
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: idClient
+          in: path
+          description: l'identifiant du client
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/ContratsResponse'
+        '400':
+          description: Identifiant du compte invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/client/contrats/{idClient}/codeProd/{lstCodeProd}':
+    get:
+      tags:
+        - client
+      summary: Récupération des contrats produits d'un client par code produit
+      description: ''
+      operationId: findContratsProduitsByCodeProduit
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: idClient
+          in: path
+          description: l'identifiant du client
+          required: true
+          type: integer
+          format: int64
+        - name: lstCodeProd
+          in: path
+          description: les codes produits
+          required: true
+          type: array
+          items:
+            type: integer
+            format: int64
+          minItems: 1
+          collectionFormat: csv
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/ContratsResponse'
+        '400':
+          description: Identifiant du client invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/client/contrats/{idClient}/codeProd/notin/{lstCodeProd}':
+    get:
+      tags:
+        - client
+      summary: Récupération des contrats produits d'un client dont le code produit est différent de la liste en entrée
+      description: ''
+      operationId: findContratsProduitsNotInCodeProduit
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: idClient
+          in: path
+          description: l'identifiant du client
+          required: true
+          type: integer
+          format: int64
+        - name: lstCodeProd
+          in: path
+          description: les codes produits
+          required: true
+          type: array
+          items:
+            type: integer
+            format: int64
+          minItems: 1
+          collectionFormat: csv
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/ContratsResponse'
+        '400':
+          description: Identifiant du client invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/client/opposition':
+    post:
+      tags:
+        - client
+      summary: Opposition des comptes du décédé
+      description: ''
+      operationId: opposerComptesClient
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: body
+          in: body
+          description: Paramètres en entrée
+          required: true
+          schema:
+            $ref: '#/definitions/OppositionRequest'
+      responses:
+        '204':
+          description: successful operation
+        '400':
+          description: Critères de recherche invalide
+        '404':
+          description: Client introuvable
+        '405':
+          description: Validation exception
+  '/client/cloture':
+    post:
+      tags:
+        - client
+      summary: Cloturer des comptes du défunt
+      description: ''
+      operationId: cloturerComptesClient
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: body
+          in: body
+          description: Paramètres en entrée
+          required: true
+          schema:
+            $ref: '#/definitions/ClotureCompteRequest'
+      responses:
+        '204':
+          description: successful operation
+        '400':
+          description: Critères de recherche invalide
+        '404':
+          description: Client introuvable
+        '405':
+          description: Validation exception
+  '/compte/transfertAgence':
+    post:
+      tags:
+        - compte
+      summary: Transfert du compte
+      description: ''
+      operationId: transfererCompte
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: body
+          in: body
+          description: Paramètres en entrée
+          required: true
+          schema:
+            $ref: '#/definitions/TransfertCompteRequest'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/TransfertCompteResponse'
+        '400':
+          description: Critères de recherche invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/client/{idClient}':
+    get:
+      tags:
+        - client
+      summary: Récupération les infos client
+      description: ''
+      operationId: getClientParId
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: idClient
+          in: path
+          description: l'identifiant du client
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/ClientDto'
+        '400':
+          description: Identifiant du client invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/compte/lever-opposition':
+    post:
+      tags:
+        - compte
+      summary: Levée d'opposition compte
+      description: ''
+      operationId: leverOppositionCompte
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: leverOppositionRequest
+          in: body
+          description: Paramètres en entrée
+          required: true
+          schema:
+            $ref: '#/definitions/LeverOppositionCompteRequest'
+      responses:
+        '204':
+          description: successful operation
+        '400':
+          description: Erreur fonctionnelle
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/compte/opposer':
+    post:
+      tags:
+        - compte
+      summary: Levée d'opposition compte
+      description: ''
+      operationId: oppositionCompte
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: oppositionRequest
+          in: body
+          description: Paramètres en entrée
+          required: true
+          schema:
+            $ref: '#/definitions/OppositionCompteRequest'
+      responses:
+        '204':
+          description: successful operation
+        '400':
+          description: Erreur fonctionnelle
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/client/lever-opposition':
+    post:
+      tags:
+        - client
+      summary: Levée d'opposition comptes client
+      description: ''
+      operationId: leverOppositionComptes
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: leverOppositionRequest
+          in: body
+          description: Paramètres en entrée
+          required: true
+          schema:
+            $ref: '#/definitions/LeverOppositionComptesClientRequest'
+      responses:
+        '204':
+          description: successful operation
+        '400':
+          description: Erreur fonctionnelle
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/tribunal/list':
+    get:
+      tags:
+        - tribunal
+      summary: Récupération des tribunaux
+      description: ''
+      operationId: getTribunaux
+      produces:
+        - application/json
+        - application/xml
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/TribunauxListResponse'
+        '400':
+          description: Identifiant du client invalide
+        '404':
+          description: Compte introuvable
+        '405':
+          description: Validation exception
+  '/devise':
+    get:
+      tags:
+        - devise
+      summary: Récupération de la liste des devises
+      description: ''
+      operationId: getCodeDevise
+      produces:
+        - application/json
+        - application/xm
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/DeviseResponse'
+        '405':
+          description: Validation exception
+  '/pays':
+    get:
+      tags:
+        - pays
+      summary: Récupération de la liste des pays
+      description: ''
+      operationId: getPays
+      produces:
+        - application/json
+        - application/xm
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/PaysResponse'
+        '405':
+          description: Validation exception
+  '/compte/succession/{idClient}':
+    get:
+      tags:
+        - compte
+      summary: Rechercher le compte succession
+      description: ''
+      operationId: getCompteSuccession
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: idClient
+          in: path
+          description: Identifiant du client
+          required: true
+          type: integer
+          format: int64
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/CompteDto'
+        '400':
+          description: Identifiant du client invalide
+        '404':
+          description: Client introuvable
+        '405':
+          description: Validation exception
+  '/user/matricule/{matricule}':
+    get:
+      tags:
+        - usersRef
+      summary: Récupération des informations de l'utilisateur
+      description: ''
+      operationId: getUserParMatricule
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: matricule
+          in: path
+          description: Matricule de l'utilisateur
+          required: true
+          type: string
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/UtilisateurRefResponse'
+        '400':
+          description: Identifiant AD user invalide
+        '404':
+          description: Identifiant AD user introuvable
+        '405':
+          description: Validation exception
+  '/user/synchroniser':
+    post:
+      tags:
+        - usersRef
+      summary: Synchroniser utilisateur
+      description: ''
+      operationId: synchroniserUtilisateur
+      consumes:
+        - application/json
+        - application/xml
+      produces:
+        - application/json
+        - application/xml
+      parameters:
+        - name: utilisateurDtoC
+          in: body
+          description: Paramètres en entrée
+          required: true
+          schema:
+            $ref: '#/definitions/UtilisateurDto'
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/UtilisateurRefResponse'
+        '400':
+          description: Identifiant AD user invalide
+        '404':
+          description: Identifiant AD user introuvable
+        '405':
+          description: Validation exception
+definitions:
+  BDCResponse:
+    type: object
+    properties:
+      compteBdc:
+        type: array
+        items:
+          $ref: '#/definitions/BDCDto'
+    xml:
+      name: BDCResponse
+  BDCetCATResponse:
+    type: object
+    properties:
+      compteBdc:
+        type: array
+        items:
+          $ref: '#/definitions/BDCDto'
+      compteDat:
+        type: array
+        items:
+          $ref: '#/definitions/DATDto'
+    xml:
+      name: BDCetDATResponse
+  MoyenPaiementResponse:
+    type: object
+    properties:
+      moyensPaiement:
+        type: array
+        items:
+          $ref: '#/definitions/MoyenPaiementDto'
+    xml:
+      name: MoyenPaiementResponse
+  SignaturesResponse:
+    type: object
+    properties:
+      idCompte:
+        type: integer
+        format: int64
+      signature:
+        type: array
+        items:
+          $ref: '#/definitions/SignatureDto'
+    xml:
+      name: SignaturesResponse
+  DeviseResponse:
+    type: object
+    properties:
+      devises:
+        type: array
+        items:
+          $ref: '#/definitions/DeviseDto'
+  PaysResponse:
+    type: object
+    properties:
+      pays:
+        type: array
+        items:
+          $ref: '#/definitions/PaysDto'
+  UtilisateurRefResponse:
+    type: object
+    properties:
+      utilisateur:
+        type: object
+        $ref: '#/definitions/UtilisateurDto'
+    xml:
+      name: UtilisateurRefResponse
+  BDCDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      reference:
+        type: string
+      duree:
+        type: integer
+        format: int32
+      dateSouscription:
+        type: string
+        format: date-time
+      nomClient:
+        type: string
+      prenomClient:
+        type: string
+      numCinClient:
+        type: string
+      montantBdc:
+        type: number
+        format: float
+      montantBdcAPayer:
+        type: number
+        format: float
+      montantBdcARembourser:
+        type: number
+        format: float
+      dateEcheance:
+        type: string
+        format: date-time
+      dateRemboursement:
+        type: string
+        format: date-time
+      typeRemboursement:
+        type: string
+      referenceRemboursement:
+        type: string
+      montantRemboursement:
+        type: number
+        format: float
+      modeLiquidationSuccession:
+        type: string
+    xml:
+      name: BDCDto
+  DATDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      reference:
+        type: string
+      duree:
+        type: integer
+        format: int32
+      dateSouscription:
+        type: string
+        format: date-time
+      nomClient:
+        type: string
+      prenomClient:
+        type: string
+      numCinClient:
+        type: string
+      montantDat:
+        type: number
+        format: float
+      montantDatAPayer:
+        type: number
+        format: float
+      montantDatARembourser:
+        type: number
+        format: float
+      dateEcheance:
+        type: string
+        format: date-time
+      dateRemboursement:
+        type: string
+        format: date-time
+      typeRemboursement:
+        type: string
+      referenceRemboursement:
+        type: string
+      montantRemboursement:
+        type: number
+        format: float
+      modeLiquidationSuccession:
+        type: string
+    xml:
+      name: DATDto
+  SearchCompteClientRequest:
+    type: object
+    properties:
+      typePieceIdentite:
+        type: string
+        description: Type Piece d'identite (C:CIN, P:PASSPORT, V:VISA, I:ICE, S:Carte Séjour, F:Identifiant fiscal, R:Registre de commerce)
+        enum:
+          - C
+          - P
+          - V
+          - I
+          - S
+          - F
+          - R
+      numeroPieceIdentite:
+        type: string
+      typeCompte:
+        type: array
+        items:
+          type: integer
+          format: int32
+        description: Type de compte [0- Compte Cheque, 1- Compte CEN, 2- Compte epargne, 3- Compte Interne, 4- Compte epargne logement...]
+      sousCategorieCompte:
+        type: array
+        items:
+          type: integer
+          format: int32
+      idCompte:
+        type: integer
+        format: int64
+      idClient:
+        type: integer
+        format: int64
+    xml:
+      name: SearchCompteClientRequest
+  SGFASearchCompteClientRequest:
+    type: object
+    properties:
+      typePieceIdentite:
+        type: string
+        description: Type Piece d'identite (C:CIN, P:PASSPORT)
+        enum:
+          - C
+          - P
+      numeroPieceIdentite:
+        type: string
+      typeCompte:
+        type: string
+        description: Type de compte [0- Compte Cheque, 1- Compte CEN, 2- Compte epargne, 3- Compte Interne, 4- Compte epargne logement...]
+      idCompte:
+        type: integer
+        format: int64
+      idClient:
+        type: integer
+        format: int64
+    xml:
+      name: SGFASearchCompteClientRequest
+  TransfertCompteRequest:
+    type: object
+    properties:
+      idUser:
+        type: string
+      idCompte:
+        type: integer
+        format: int64
+      oldAgence:
+        type: string
+      newAgence:
+        type: string
+      commentaire:
+        type: string
+      adresseMac:
+        type: string
+      motif:
+        $ref: '#/definitions/MotifTransfertEnum'
+    xml:
+      name: TransfertCompteRequest
+  TransfertCompteResponse:
+    type: object
+    properties:
+      message:
+        type: string
+      status:
+        type: boolean
+    xml:
+      name: TransfertCompteResponse
+  SearchCompteResponse:
+    type: object
+    properties:
+      lstComptes:
+        type: array
+        items:
+          $ref: '#/definitions/CompteDto'
+      request:
+        type: object
+        $ref: '#/definitions/SearchCompteClientRequest'
+    xml:
+      name: SearchCompteResponse
+  SearchClientResponse:
+    type: object
+    properties:
+      lstClient:
+        type: array
+        items:
+          $ref: '#/definitions/ClientDto'
+      request:
+        type: object
+        $ref: '#/definitions/SearchCompteClientRequest'
+    xml:
+      name: SearchCompteResponse
+  SGFASearchClientResponse:
+    type: object
+    properties:
+      lstClient:
+        type: array
+        items:
+          $ref: '#/definitions/ClientDto'
+      request:
+        type: object
+        $ref: '#/definitions/SGFASearchCompteClientRequest'
+    xml:
+      name: SGFASearchClientResponse
+  CountAvoirResponse:
+    type: object
+    properties:
+      contrats:
+        type: integer
+        format: int64
+      bdc:
+        type: integer
+        format: int64
+      cat:
+        type: integer
+        format: int64
+    xml:
+      name: CountAvoirResponse
+  ContratsResponse:
+    type: object
+    properties:
+      contrat:
+        type: array
+        items:
+          $ref: '#/definitions/ContratsDto'
+    xml:
+      name: ContratsResponse
+  ContratsDto:
+    type: object
+    properties:
+      idcontrat:
+        type: integer
+        format: int64
+      idcompte:
+        type: integer
+        format: int64
+      idenclie:
+        type: integer
+        format: int64
+      codtypcontrat:
+        type: integer
+        format: int64
+      sousc_statut:
+        type: string
+      codburposai:
+        type: integer
+        format: int64
+      codburpores:
+        type: integer
+        format: int64
+      montant:
+        type: integer
+        format: int64
+      codeconv:
+        type: integer
+        format: int64
+      sousc_date:
+        type: string
+        format: date-time
+      dateres:
+        type: string
+        format: date-time
+      produit:
+        type: object
+        $ref: '#/definitions/ProduitDto'
+      pack:
+        type: object
+        $ref: '#/definitions/PackDto'
+    xml:
+      name: ContratsDto
+  ProduitDto:
+    type: object
+    properties:
+      codeprod:
+        type: integer
+        format: int64
+      libeprod:
+        type: string
+      famille:
+        $ref: '#/definitions/FamilleProduitDto'
+    xml:
+      name: ProduitDto
+  FamilleProduitDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      libelle:
+        type: string
+      categorie:
+        type: integer
+        format: int32
+    xml:
+      name: FamilleProduitDto
+  PackDto:
+    type: object
+    properties:
+      codepack:
+        type: integer
+        format: int64
+      libpack:
+        type: string
+    xml:
+      name: PackDto
+  CompteDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      intituleCompte:
+        type: string
+      cleCompte:
+        type: string
+      devise:
+        type: string
+      rib:
+        type: string
+      periodiciteRel:
+        type: string
+      numLivret:
+        type: integer
+        format: int64
+      dateEtatCompte:
+        type: string
+        format: date-time
+      dateOuverture:
+        type: string
+        format: date
+      codeMotifEtatCompte:
+        type: integer
+        format: int64
+      client:
+        type: object
+        $ref: '#/definitions/ClientDto'
+      adresseCompte:
+        type: object
+        $ref: '#/definitions/AdresseDto'
+      etatCompte:
+        type: object
+        $ref: '#/definitions/EtatCompteDto'
+      categorieCompte:
+        type: object
+        $ref: '#/definitions/CategorieCompteDto'
+      sousCategorieCompte:
+        type: object
+        $ref: '#/definitions/SousCategorieCompteDto'
+      agence:
+        type: object
+        $ref: '#/definitions/AgenceDto'
+    xml:
+      name: CompteDto
+  ClientDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      nomRaisonSocial:
+        type: string
+      prenom:
+        type: string
+      clientCivilite:
+        type: string
+      telephoneBureau:
+        type: string
+      telephoneDomicile:
+        type: string
+      telephoneGsm:
+        type: string
+      fax:
+        type: string
+      dateNaissance:
+        type: string
+        format: date-time
+      lieuNaissance:
+        type: string
+      numeroPieceIdentite:
+        type: string
+      typePieceIdentite:
+        type: object
+        $ref: '#/definitions/TypePieceIdentiteDto'
+      datePieceIdentite:
+        type: string
+      adresseClient:
+        type: object
+        $ref: '#/definitions/AdresseDto'
+      categorie:
+        type: object
+        $ref: '#/definitions/CategorieClientDto'
+      nationalite:
+        type: object
+        $ref: '#/definitions/PaysDto'
+      categorieSocioProfessionnelle:
+        type: object
+        $ref: '#/definitions/CategorieSocioProfessionelleDto'
+      situationFamiliale:
+        type: object
+        $ref: '#/definitions/SituationFamilialeDto'
+      situationJuridique:
+        type: object
+        $ref: '#/definitions/SituationJuridiqueDto'
+      secteurActivite:
+        type: object
+        $ref: '#/definitions/SecteurActiviteDto'
+      statutClient:
+        type: object
+        $ref: '#/definitions/StatutClientDto'
+      typeClient:
+        type: object
+        $ref: '#/definitions/TypeClientDto'
+      agence:
+        type: object
+        $ref: '#/definitions/AgenceDto'
+      codeUserGestionnaire:
+        type: string
+      email:
+        type: string
+      agentEconomique:
+        type: string
+      dateCreation:
+        type: string
+        format: date-time
+      sexe:
+        type: string
+      comptes:
+        type: array
+        items:
+          $ref: '#/definitions/CompteDto'
+    xml:
+      name: ClientDto
+  TypeClientDto:
+    type: object
+    properties:
+      id:
+        type: string
+      libelle:
+        type: string
+    xml:
+      name: TypeClientDto
+  AdresseDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      codeCategorieAdresse:
+        type: string
+      typeAdresse:
+        type: string
+      intitule1:
+        type: string
+      intitule2:
+        type: string
+      intitule3:
+        type: string
+      intitule4:
+        type: string
+      codePostale:
+        type: string
+      codeBureauOperGest:
+        type: integer
+        format: int64
+      codeBureauPostale:
+        type: integer
+        format: int64
+      email:
+        type: string
+      agentEconomique:
+        type: string
+      pays:
+        type: object
+        $ref: '#/definitions/PaysDto'
+      ville:
+        type: object
+        $ref: '#/definitions/VilleDto'
+    xml:
+      name: AdresseDto
+  VilleDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      libelle:
+        type: string
+      type:
+        type: string
+      libelleProvince:
+        type: string
+    xml:
+      name: VilleDto
+  PaysDto:
+    type: object
+    properties:
+      id:
+        type: string
+      libelle:
+        type: string
+    xml:
+      name: PaysDto
+  EtatCompteDto:
+    type: object
+    properties:
+      key:
+        type: string
+      libelle:
+        type: string
+    xml:
+      name: EtatCompteDto
+  CategorieCompteDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      libelle:
+        type: string
+      db:
+        type: string
+    xml:
+      name: CategorieCompteDto
+  CategorieClientDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      libelle:
+        type: string
+    xml:
+      name: CategorieClientDto
+  StatutClientDto:
+    type: object
+    properties:
+      code:
+        type: string
+      libelle:
+        type: string
+    xml:
+      name: StatutClientDto
+  SousCategorieCompteDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      libelle:
+        type: string
+    xml:
+      name: SousCategorieCompteDto
+  ProvinceDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+      libelle:
+        type: string
+    xml:
+      name: ProvinceDto
+  AgenceDto:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+      intitule:
+        type: string
+      categorie:
+        type: string
+      adresse:
+        type: string
+      tel:
+        type: string
+      libelleRegion:
+        type: string
+      libelleProvince:
+        type: string
+    xml:
+      name: AgenceDto
+  SignatureDto:
+    type: object
+    properties:
+      numeroSignature:
+        type: integer
+        format: int32
+      dateEffet:
+        type: string
+        format: date-time
+      dateFinEffet:
+        type: string
+        format: date-time
+      image:
+        type: string
+        format: byte
+    xml:
+      name: SignatureDto
+  MoyenPaiementDto:
+    type: object
+    properties:
+      typeMoyenPaiement:
+        type: string
+      statutDemande:
+        type: string
+      typeDemande:
+        type: string
+      dateDemande:
+        type: string
+        format: date-time
+      dateStatut:
+        type: string
+        format: date-time
+    xml:
+      name: MoyenPaiementDto
+  TypePieceIdentiteDto:
+    type: object
+    properties:
+      id:
+        type: string
+      libelle:
+        type: string
+    xml:
+      name: TypePieceIdentiteDto
+  OppositionRequest:
+    type: object
+    properties:
+      idClient:
+        type: integer
+        format: int64
+      codeUtilisateur:
+        type: string
+      codeBureau:
+        type: integer
+        format: int64
+      motif:
+        $ref: '#/definitions/MotifOppositionEnum'
+    xml:
+      name: OppositionRequest
+  ClotureCompteRequest:
+    type: object
+    properties:
+      idClient:
+        type: integer
+        format: int64
+      codeUtilisateur:
+        type: string
+      codeBureau:
+        type: integer
+        format: int64
+      motif:
+        $ref: '#/definitions/MotifClotureEnum'
+    xml:
+      name: OppositionRequest
+  OppositionCompteRequest:
+    type: object
+    properties:
+      idCompte:
+        type: integer
+        format: int64
+      codeUtilisateur:
+        type: string
+      codeBureau:
+        type: integer
+        format: int64
+      motif:
+        $ref: '#/definitions/MotifOppositionEnum'
+    xml:
+      name: OppositionCompteRequest
+  LeverOppositionCompteRequest:
+    type: object
+    properties:
+      idCompte:
+        type: integer
+        format: int64
+      codeUtilisateur:
+        type: string
+      codeBureau:
+        type: integer
+        format: int64
+      motif:
+        $ref: '#/definitions/MotifOppositionEnum'
+    xml:
+      name: LeverOppositionCompteRequest
+  LeverOppositionComptesClientRequest:
+    type: object
+    properties:
+      idClient:
+        type: integer
+        format: int64
+      codeUtilisateur:
+        type: string
+      codeBureau:
+        type: integer
+        format: int64
+      motif:
+        $ref: '#/definitions/MotifOppositionEnum'
+    xml:
+      name: LeverOppositionComptesClientRequest
+  TribunauxListResponse:
+    type: object
+    properties:
+      tribunaux:
+        type: array
+        items:
+          $ref: '#/definitions/TribunalDto'
+    xml:
+      name: TribunauxListResponse
+  TribunalDto:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int64
+      libelle:
+        type: string
+    xml:
+      name: TribunalDto
+  CreditDto:
+    type: object
+    properties:
+      typeCredit:
+        type: string
+        description: Type de credit
+        enum:
+          - CONSO
+          - IMMO
+      numDossier:
+        type: string
+        format: int64
+      capitalRestantDu:
+        type: number
+        format: double
+      dureCredit:
+        type: number
+        format: double
+      mensualite:
+        type: number
+        format: double
+      montGarantie:
+        type: number
+        format: double
+      montantUtilise:
+        type: number
+        format: double
+      mtCredit:
+        type: number
+        format: double
+      mtFrais:
+        type: number
+        format: double
+      mtGarantieGlob:
+        type: number
+        format: double
+      mtGarantiePerso:
+        type: number
+        format: double
+      mtImpyPrincl:
+        type: number
+        format: double
+      mtIntertRetard:
+        type: number
+        format: double
+      nbrEchRestante:
+        type: integer
+        format: int32
+      nbrImpayes:
+        type: integer
+        format: int32
+      client:
+        type: object
+        $ref: '#/definitions/ClientDto'
+      compte:
+        type: object
+        $ref: '#/definitions/CompteDto'
+      codeAgence:
+        type: string
+      codeCliGarnt:
+        type: string
+      codeGarantie:
+        type: string
+      codeProduit:
+        type: string
+      date1Ech:
+        type: string
+      dateAncImpay:
+        type: string
+      dateCloture:
+        type: string
+      dateCreaGart:
+        type: string
+      dateDernEch:
+        type: string
+      dateEcheance:
+        type: string
+      dateFinGart:
+        type: string
+      dateGestion:
+        type: string
+      dateInfoNeg:
+        type: string
+      dateModif:
+        type: string
+      dateModifGart:
+        type: string
+      datePrevCloture:
+        type: string
+      dateStatPaiemt:
+        type: string
+      dateprochaineEch:
+        type: string
+      datereglDerniEch:
+        type: string
+      libelleProduit:
+        type: string
+      motifCloture:
+        type: string
+      motifModif:
+        type: string
+      numInterrog:
+        type: string
+      objetCredit:
+        type: string
+      periodicite:
+        type: string
+      refGarantie:
+        type: string
+      statutPaiement:
+        type: string
+      typeContrat:
+        type: string
+      typeDeclaration:
+        type: string
+      typeGarantie:
+        type: string
+      typeInfoNeg:
+        type: string
+      typeTaux:
+        type: string
+  DeviseDto:
+    type: object
+    properties:
+      id:
+        type: string
+      libelle:
+        type: string
+    xml:
+      name: DeviseDto
+  SituationJuridiqueDto:
+    type: object
+    properties:
+      id:
+        type: string
+      libelle:
+        type: string
+    xml:
+      name: SituationJuridiqueDto
+  SituationFamilialeDto:
+    type: object
+    properties:
+      id:
+        type: string
+      libelle:
+        type: string
+    xml:
+      name: SituationFamilialeDto
+  CategorieSocioProfessionelleDto:
+    type: object
+    properties:
+      id:
+        type: string
+      libelle:
+        type: string
+    xml:
+      name: CategorieSocioProfessionelleDto
+  SecteurActiviteDto:
+    type: object
+    properties:
+      id:
+        type: string
+      libelle:
+        type: string
+    xml:
+      name: SecteurActiviteDto
+  UtilisateurDto:
+    type: object
+    properties:
+      codeUtilisateur:
+        type: string
+      nom:
+        type: string
+      prenom:
+        type: string
+      codeAgence:
+        type: string
+      libelleAgence:
+        type: string
+      matricule:
+        type: string
+      role:
+        type: string
+      idRole:
+        type: integer
+        format: int32
+      mail:
+        type: string
+      loginAd:
+        type: string
+      employeIdMaj:
+        type: string
+      dateDebut:
+        type: string
+      dateFin:
+        type: string
+      mdp:
+        type: string
+      etat:
+        type: boolean
+    xml:
+      name: UtilisateurDto
+  MotifOppositionEnum:
+    type: string
+    enum: [DECES, MAIN_LEVEE]
+    description: >
+      Sort order:
+       * `DECES` - DECES
+       * `MAIN_LEVEE` - MAIN LEVEE
+  MotifTransfertEnum:
+    type: string
+    enum: [SUCCESSION, DEMANDE_CLIENT]
+    description: >
+      Sort order:
+       * `SUCCESSION` - Succession
+       * `DEMANDE_CLIENT` - Demande Client
+  MotifClotureEnum:
+    type: string
+    enum: [DECES]
+    description: >
+      Sort order:
+       * `DECES` - DECES
+
+  ApiError:
+    type: "object"
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+    xml:
+      name: ApiError
+

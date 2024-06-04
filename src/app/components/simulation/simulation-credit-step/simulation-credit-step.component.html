@@ -1,0 +1,51 @@
+<div class="flex w-full bg-white">
+  <div class="container">
+    <div class="w-full p-8 rounded-2xl shadow-2xl">
+      <div>
+        <app-simulation-form [selectedClient]="selectedClient"></app-simulation-form>
+      </div>
+      <div class="my-8">
+        <div
+          (click)="openConventionForm()"
+          class="w-full bg-gray-100 uppercase text-gray-900 text-primary mt-2 p-4 cursor-pointer focus:outline-none focus:shadow-outline"
+        >
+          Données de crédit(CI SALAR SECTEUR PRV&lt; +7 ans &lt;50k TERRAIN)
+        </div>
+        <div *ngIf="openConvention" class="p-4">
+          <app-convention-form></app-convention-form>
+        </div>
+      </div>
+      <div class="my-8">
+        <div
+          (click)="openFraisList()"
+          class="w-full uppercase bg-gray-100 text-gray-900 text-primary mt-2 p-4 cursor-pointer focus:outline-none focus:shadow-outline"
+        >
+          Les Frais
+        </div>
+        <div *ngIf="openFrais" class="py-3">
+          <app-frais-list></app-frais-list>
+        </div>
+      </div>
+
+      <div class="my-8">
+        <div
+          (click)="openAssuranceList()"
+          class="w-full uppercase bg-gray-100 text-gray-900 text-primary mt-2 p-4 cursor-pointer focus:outline-none focus:shadow-outline"
+        >
+          Les assurances
+        </div>
+        <div *ngIf="openAssurance" class="py-3">
+          <app-assurance-list></app-assurance-list>
+        </div>
+      </div>
+
+      <div class="my-2 mt-6 flex justify-center">
+        <button
+          class="uppercase text-sm right-0 tracking-wide w-48 bg-primary text-gray-100 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+        >
+          Simuler <i class="fa-solid fa-calculator ml-2"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+{
+  "$schema": "../../../node_modules/ng-openapi-gen/ng-openapi-gen-schema.json",
+  "input": "src/swaggers/instruction-api-swagger.yaml",
+  "output": "src/app/services/generated/instruction-api",
+  "module": "InstructionClientApi",
+  "ignoreUnusedModels": true,
+  "minParamsForContainer": 2,
+  "sortParams": "desc",
+  "defaultTag": "Api",
+  "removeStaleFiles": true,
+  "modelIndex": true,
+  "serviceIndex": true,
+  "apiModule": true,
+  "enumModule": true,
+  "generateExamples": false,
+  "camelCase": false,
+  "customFileSuffix": {
+    "model": "",
+    "example": ".example",
+    "service": ".service"
+  }
+}

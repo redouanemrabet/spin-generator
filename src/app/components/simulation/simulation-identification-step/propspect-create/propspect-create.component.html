@@ -1,0 +1,130 @@
+<div class="flex w-full bg-white">
+  <div class="container">
+    <div class="w-full p-8 rounded-2xl shadow-2xl">
+      <div class="flex">
+        <h3 class="uppercase">nouveau prospect</h3>
+      </div>
+    <form  [formGroup]="prospectForm" (ngSubmit)="saveProspect()">
+      <div class="grid grid-cols-1 gap-5 md:grid-cols-2 mt-5">
+        <div>
+          <label for="countries" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white"
+            ><i class="fa-solid fa-list-check ml-1 mr-2"></i> civilité</label
+          >
+          <ng-select
+          [class.custom]="prospectForm.get('civilite').invalid && (prospectForm.get('civilite').dirty || prospectForm.get('civilite').touched)"
+          [items]="civilites_"
+          formControlName="civilite"
+          class="custom-ng-select mt-4 rounded"
+          bindValue="id"
+          bindLabel="name"
+          [searchable]="false"
+          placeholder="Civilité">
+        </ng-select>
+        </div>
+        <div>
+          <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white"
+            ><i class="fa-solid fa-user text-gray-400 ml-1 mr-2"></i> NOM</label
+          >
+          <input
+          [class.custom]="prospectForm.get('lastname').invalid && (prospectForm.get('lastname').dirty || prospectForm.get('lastname').touched)"
+          formControlName="lastname"
+            class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded focus:outline-none focus:shadow-outline"
+            type="text"
+            placeholder="*"
+          />
+        </div>
+        <div>
+          <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white"
+            ><i class="fa-solid fa-user text-gray-400 ml-1 mr-2"></i> prénom</label
+          >
+          <input
+          [class.custom]="prospectForm.get('firstname').invalid && (prospectForm.get('firstname').dirty || prospectForm.get('firstname').touched)"
+            formControlName="firstname"
+            class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded focus:outline-none focus:shadow-outline"
+            type="text"
+            placeholder="*"
+          />
+        </div>
+        <div>
+          <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white"
+            ><i class="fa-solid fa-pen-to-square text-gray-400 ml-1 mr-2"></i> numéro de télephone client</label
+          >
+          <input
+          [class.custom]="prospectForm.get('mphone').invalid && (prospectForm.get('mphone').dirty || prospectForm.get('mphone').touched)"
+            formControlName="mphone"
+            class="w-full bg-gray-100  text-gray-900 mt-2 p-3 rounded  focus:shadow-outline"
+            type="text"
+            placeholder="*"
+          />
+
+        </div>
+        <div>
+          <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white">
+            <i class="fa-solid fa-pen-to-square ml-1 mr-2"></i>Date de naissance</label
+          >
+
+
+          <input
+          [class.custom]="prospectForm.get('birthday').invalid && (prospectForm.get('birthday').dirty || prospectForm.get('birthday').touched)"
+            formControlName="birthday"
+            class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded focus:outline-none focus:shadow-outline"
+            type="date"
+            placeholder="*"
+          />
+        </div>
+        <div>
+          <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white">
+            <i class="fa-solid fa-pen-to-square ml-1 mr-2"></i>Adresse client</label
+          >
+
+          <input
+            formControlName="address"
+            [class.custom]="prospectForm.get('address').invalid && (prospectForm.get('address').dirty || prospectForm.get('address').touched)"
+            class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded focus:outline-none focus:shadow-outline"
+            type="text"
+            placeholder="*"
+          />
+        </div>
+
+        <div>
+          <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white"
+            ><i class="fa-solid fa-list-check ml-1 mr-2"></i>Type de pièce d'identité</label
+          >
+          <ng-select
+          [class.custom]="prospectForm.get('typePieceIdentite').invalid && (prospectForm.get('typePieceIdentite').dirty || prospectForm.get('typePieceIdentite').touched)"
+          formControlName="typePieceIdentite"
+          [items]="typePI_"
+          class="custom-ng-select mt-4 rounded "
+          bindValue="id"
+          bindLabel="name"
+          [searchable]="false"
+          placeholder="Sélectionner un type de pièce d'identité ">
+        </ng-select>
+        </div>
+
+        <div>
+          <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white">
+            <i class="fa-solid fa-pen-to-square ml-1 mr-2"></i> numéro de pièce d'identité</label
+          >
+          <input
+          [class.custom]="prospectForm.get('numeroPieceIdentite').invalid && (prospectForm.get('numeroPieceIdentite').dirty || prospectForm.get('numeroPieceIdentite').touched)"
+            formControlName="numeroPieceIdentite"
+            class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded focus:outline-none focus:shadow-outline"
+            type="text"
+            placeholder="*"
+          />
+        </div>
+      </div>
+      <div class="my-2 mt-6 flex justify-end">
+        <button
+          class="uppercase text-sm right-0 tracking-wide w-40 bg-primary text-gray-100 p-3 rounded focus:outline-none focus:shadow-outline"
+        >
+          <i class="fa-solid fa-check mr-2"></i> Confirmer
+        </button>
+      </div>
+    </form>
+      <!-- COMPONENT CODE -->
+    </div>
+
+  </div>
+</div>

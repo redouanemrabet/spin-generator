@@ -1,0 +1,131 @@
+<div class="flex w-full bg-white">
+  <div class="container">
+    <div class="w-full p-8 rounded-2xl shadow-2xl">
+      <div class="flex">
+        <h2 class="uppercase text-bold">recherche une fiche client</h2>
+      </div>
+      <form [formGroup]="clientSearchForm" (ngSubmit)="rechercherClient()">
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-2 mt-8">
+          <div>
+            <label for="type_pièce" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white"
+              ><i class="fa-solid fa-list-check ml-1 mr-2"></i> Type de pièce d'identité</label
+            >
+            <ng-select
+              [items]="typePI"
+              formControlName="typePieceIdentite"
+              [class.custom]="
+                clientSearchForm.get('typePieceIdentite').invalid &&
+                (clientSearchForm.get('typePieceIdentite').dirty || clientSearchForm.get('typePieceIdentite').touched)
+              "
+              class="custom-ng-select mt-5 rounded focus:outline-primary  focus:shadow-outline"
+              bindValue="id"
+              [searchable]="false"
+              bindLabel="libelle"
+              placeholder="Sélectionner un type de pièce d'identité"
+            >
+            </ng-select>
+          </div>
+          <div>
+            <label for="catégorie" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white"
+              ><i class="fa-solid fa-list-check ml-1 mr-2"></i> Catégorie de compte</label
+            >
+            <ng-select
+              formControlName="typeCompte"
+              [class.custom]="
+                clientSearchForm.get('typeCompte').invalid &&
+                (clientSearchForm.get('typeCompte').dirty || clientSearchForm.get('typeCompte').touched)
+              "
+              [items]="categoriesCompte"
+              class="custom-ng-select mt-5 rounded"
+              bindValue="id"
+              bindLabel="libelle"
+              [searchable]="false"
+              placeholder="Sélectionner une catégorie de compte"
+            >
+            </ng-select>
+          </div>
+          <div>
+            <label for="numeroclient" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white"
+              ><i class="fa-solid fa-user text-gray-400 ml-1 mr-2"></i> numéro client</label
+            >
+            <input
+              [class.custom]="
+                clientSearchForm.get('idClient').invalid &&
+                (clientSearchForm.get('idClient').dirty || clientSearchForm.get('idClient').touched)
+              "
+              id="numeroclient"
+              formControlName="idClient"
+              class="form-control w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded focus:outline-1 focus:outline-primary   focus:shadow-outline"
+              type="number"
+              placeholder="*"
+            />
+          </div>
+          <div>
+            <label for="piecedidentite" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white">
+              <i class="fa-solid fa-pen-to-square ml-1 mr-2"></i>numéro de piece d'identité</label
+            >
+
+            <input
+              [class.custom]="
+                clientSearchForm.get('numeroPieceIdentite').invalid &&
+                (clientSearchForm.get('numeroPieceIdentite').dirty ||
+                  clientSearchForm.get('numeroPieceIdentite').touched)
+              "
+              formControlName="numeroPieceIdentite"
+              id="piecedidentite"
+              class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded focus:outline-primary focus:shadow-outline"
+              type="number"
+              placeholder="*"
+            />
+          </div>
+          <div>
+            <label for="comptebancaire" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white">
+              <i class="fa-solid fa-pen-to-square ml-1 mr-2"></i> numéro de compte</label
+            >
+            <input
+              id="comptebancaire"
+              [class.custom]="
+                clientSearchForm.get('idCompte').invalid &&
+                (clientSearchForm.get('idCompte').dirty ||
+                  clientSearchForm.get('idCompte').touched)
+              "
+              formControlName="idCompte"
+              class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded focus:outline-none focus:shadow-outline"
+              type="number"
+              placeholder="*"
+            />
+          </div>
+        </div>
+        <div class="my-2 flex justify-end">
+          <button
+            class="uppercase text-sm right-0 tracking-wide w-40 mr-2 bg-gray-100 text-back p-3 rounded focus:outline-primary focus:shadow-outline"
+            type="button"
+            (click)="resetForm()"
+          >
+            <i class="fa-solid fa-xmark mr-2"></i> annuler
+          </button>
+
+          <button
+            class="uppercase text-sm right-0 tracking-wide w-40 bg-primary text-gray-100 p-3 rounded focus:outline-none focus:shadow-outline"
+            [disabled]="clientSearchForm.invalid || !clientSearchForm.dirty"
+            type="submit"
+          >
+          <span *ngIf="!searching">
+            <i class="fa-solid fa-magnifying-glass mr-2"></i>
+            Rechercher
+          </span>
+
+            <span *ngIf="searching" class="text-white flex items-center">
+              <svg aria-hidden="true" class="w-5 h-5 text-gray-200 mr-2 animate-spin dark:text-gray-600 fill-white" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+                <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+            </svg>
+              Recherche...
+            </span>
+
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

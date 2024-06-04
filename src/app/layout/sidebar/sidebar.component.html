@@ -1,0 +1,22 @@
+<div
+  class="sidebar border-t-2 border-r-2 border-t-gray-100 bg-white shadow-xl"
+  [ngClass]="{ 'border-r-2 border-r-gray-200': !isCollapsed }"
+>
+  <ul *ngIf="menuItems">
+    <li *ngFor="let menu of menuItems">
+      <a
+        [matTooltip]="menu.label"
+        class="border-y-2 border-y-gray-200 p-4 text-primary hover:border-b-primary hover:text-sky-700 hover:font-bold"
+        [ngClass]="{
+          'font-bold border-b-2 bg-gray-200 text-bold border-b-primary': currentUrl && currentUrl.includes(menu.path)
+        }"
+        [routerLink]="menu.path"
+      >
+        <i [ngClass]="menu.icon" class="border-white text-primary"></i>
+        <span *ngIf="!isCollapsed" class="px-2 mx-2 text-sm pb-2">
+          {{ menu.label }}
+        </span>
+      </a>
+    </li>
+  </ul>
+</div>

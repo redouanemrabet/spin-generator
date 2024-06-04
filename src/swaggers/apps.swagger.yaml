@@ -1,0 +1,28 @@
+openapi: 3.0.0
+info:
+  title: App API
+  version: 1.0.0
+paths:
+  /apps:
+    get:
+      summary: Get a list of apps
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              examples:
+                example1:
+                  value:
+                    apps:
+                      - id: 1
+                        name: "App 1"
+                      - id: 2
+                        name: "App 2"
+                example2:
+                  value:
+                    apps:
+                      - id: 3
+                        name: "App 3"
+                      - id: 4
+                        name: "App 4"

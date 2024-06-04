@@ -1,0 +1,113 @@
+<div class="flex">
+  <div class="container">
+    <div class="w-full p-8 rounded-2xl shadow-2xl bg-white">
+      <div class="flex">
+        <h2 class="uppercase text-bold">rechercher une simulation</h2>
+      </div>
+      <form action="">
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-3 mt-8">
+          <div>
+            <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white"
+              ><i class="fa-solid fa-user text-gray-400 ml-1 mr-2"></i> N° demande</label
+            >
+            <input
+              class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+              type="number"
+              placeholder="*"
+            />
+          </div>
+          <div>
+            <label for="type_pièce" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white"
+              ><i class="fa-solid fa-list-check ml-1 mr-2"></i> type de pièce d'identité</label
+            >
+            <select
+              id="type_piece"
+              class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+            >
+              <option value="A">B</option>
+              <option value="B">A</option>
+              <option value="C">D</option>
+              <option value="D">E</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white">
+              <i class="fa-solid fa-pen-to-square ml-1 mr-2"></i>numéro de téléphone</label
+            >
+
+            <input
+              class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+              type="number"
+              placeholder="*"
+            />
+          </div>
+          <div>
+            <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white">
+              <i class="fa-solid fa-pen-to-square ml-1 mr-2"></i> N° Pièce d'identite</label
+            >
+            <input
+              class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+              type="number"
+              placeholder="*"
+            />
+          </div>
+          <div>
+            <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white">
+              <i class="fa-regular fa-calendar-days ml-1 mr-2"></i>Date Début</label
+            >
+            <input
+              class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+              type="date"
+              placeholder="*"
+            />
+          </div>
+          <div>
+            <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white">
+              <i class="fa-regular fa-calendar-days ml-1 mr-2"></i> date de fin</label
+            >
+            <input
+              class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+              type="date"
+              placeholder="**/**/****"
+            />
+          </div>
+          <div>
+            <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white">
+              <i class="fa-solid fa-dollar-sign ml-1 mr-2"></i> montant minimal</label
+            >
+            <input
+              class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+              type="number"
+              placeholder="*"
+            />
+          </div>
+          <div>
+            <label for="" class="block mb-2 text-sm uppercase text-gray-900 dark:text-white">
+              <i class="fa-solid fa-dollar-sign ml-1 mr-2"></i> mantant maximal</label
+            >
+            <input
+              class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+              type="number"
+              placeholder="*"
+            />
+          </div>
+        </div>
+        <div class="my-2 flex justify-end">
+          <button
+            class="uppercase text-sm right-0 tracking-wide w-40 mr-2 bg-gray-100 text-back p-3 rounded-lg focus:outline-none focus:shadow-outline"
+            type="button"
+          >
+            <i class="fa-solid fa-xmark mr-2"></i> annuler
+          </button>
+          <button
+            class="uppercase text-sm right-0 tracking-wide w-40 bg-primary text-gray-100 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+            type="button"
+          >
+            <i class="fa-solid fa-magnifying-glass mr-2"></i> Rechercher
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

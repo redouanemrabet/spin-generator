@@ -1,0 +1,12 @@
+<app-header [isCollapsed]="isCollapsed" (collapse)="isCollapsed = !isCollapsed" [activeTab]="activeRoute"></app-header>
+
+<div class="flex h-screen">
+  <div class=" ">
+    <app-sidebar [currentUrl]="currentUrl" [currentTab]="activeRoute" [isCollapsed]="isCollapsed"></app-sidebar>
+  </div>
+
+  <div class="flex-1 p-2">
+    <router-outlet></router-outlet>
+
+  </div>
+</div>
