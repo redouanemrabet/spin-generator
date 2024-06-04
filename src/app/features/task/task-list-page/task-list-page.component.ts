@@ -64,5 +64,8 @@ export class TaskListPageComponent {
     this.projectsList.push(newProject);
     console.log('New project added:', this.projectForm);
 
+    this.projectForm.reset();
+    this.openTab=1;
+
   }
 }
