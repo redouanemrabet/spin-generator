@@ -22,7 +22,7 @@ export class TaskListPageComponent {
       name: ['', Validators.required],
       date: ['', Validators.required],
       devise: ['', Validators.required],
-      pivotModel: [null, Validators.required],
+      pivotModele: [null, Validators.required],
       pivotSociete: [null, Validators.required]
     });
   }
@@ -57,7 +57,7 @@ export class TaskListPageComponent {
       name: this.projectForm?.value.name,
       date: this.projectForm?.value.date,
       devise: this.projectForm?.value.devise,
-      pivotModel: this.projectForm?.value.pivotModel,
+      pivotModele: this.projectForm?.value.pivotModele,
       pivotSociete: this.projectForm?.value.pivotSociete
     };
 

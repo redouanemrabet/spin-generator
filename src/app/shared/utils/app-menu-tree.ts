@@ -20,7 +20,7 @@ export const AppMenuTree = [
     items: [
       {
         icon: 'fas fa-briefcase',
-        label: 'Rechercher les taches',
+        label: 'Projets',
         path: '/task/list',
       },
     ],
@@ -33,7 +33,7 @@ export const AppMenuTree = [
     items: [
       {
         icon: 'fas fa-users',
-        label: 'Parametrage global',
+        label: 'Utilisateurs',
         path: '/setting/setting',
       },
     ],
@@ -45,18 +45,18 @@ export const AppMenuTree = [
     authority: 'SETTING_ROLE',
     items: [
       {
-        icon: 'fas fa-calculator',
-        label: 'Nouvelle simulation',
+        icon: 'fas fa-file-export',
+        label: 'Générer un ESPF',
         path: '/onboarding/create-simulation',
       },
       {
-        icon: 'fas fa-list',
-        label: 'List des simulations',
+        icon: 'fas fa-table-list',
+        label: 'Liste des Attributs',
         path: '/onboarding/list-simulation',
       },
       {
-        icon: 'fas fa-spinner',
-        label: 'Demandes en cours',
+        icon: 'fas fa-list',
+        label: 'Liste des Comptes & Domaines',
         path: '/onboarding/demand-list',
       },
     ],
