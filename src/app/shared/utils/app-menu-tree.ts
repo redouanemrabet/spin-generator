@@ -46,7 +46,7 @@ export const AppMenuTree = [
     items: [
       {
         icon: 'fas fa-file-export',
-        label: 'Générer un ',
+        label: 'Générer un ESTD ',
         path: '/onboarding/create-simulation',
       },
       {
