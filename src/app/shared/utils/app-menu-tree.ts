@@ -46,7 +46,7 @@ export const AppMenuTree = [
     items: [
       {
         icon: 'fas fa-file-export',
-        label: 'Générer un ESPF',
+        label: 'Générer un ',
         path: '/onboarding/create-simulation',
       },
       {
